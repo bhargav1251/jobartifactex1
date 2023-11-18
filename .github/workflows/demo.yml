@@ -31,10 +31,15 @@ jobs:
           name: dist-files
           path: |
             dist
-            package.json
   deploy:
     needs: build
     runs-on: ubuntu-latest
     steps:
+      - name: Dowloading artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: dist-files
+      - name: list out the files
+        run: ls -al
       - name: Deploy
         run: echo "Deploying..."
